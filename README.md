@@ -33,11 +33,16 @@ sudo pacman-key --init
 sudo pacman-key --populate
 sudo pacman-key --refresh-keys
 sudo pacman -U ~/arch-keyring.tar.zst
+
 # SteamOS changed the pacman repos in November 2022, so this just updates the specs of the repo files
 # https://www.reddit.com/r/SteamDeck/comments/zrc2ep/comment/j14iysa/
 sudo sed -i -e 's/\[jupiter\]/[jupiter-rel]/g' -e 's/\[holo\]/[holo-rel]/g' -e 's/\[core\]/[core-rel]/g' -e 's/\[extra\]/[extra-rel]/g' -e 's/\[community\]/[community-rel]/g' -e 's/\[multilib\]/[multilib-rel]/g' /etc/pacman.conf
+
+
 # Upgrade the whole system
-sudo pacman -Syu
+
+sudo pacman -Syu base-devel holo/linux-headers linux-neptune-headers holo/linux-lts-headers git glibc gcc gcc-libs fakeroot linux-api-headers libarchive
+
 yay -S base-devel
 # compatibility library for conda ROS libraries
 sudo pacman -S core-rel/libxcrypt-compat
